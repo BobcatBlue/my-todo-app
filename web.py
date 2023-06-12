@@ -5,9 +5,14 @@ todos = functions.get_todos()
 
 def add_todo():
     todo = st.session_state["new_todo"] + "\n"
-    todos.append(todo)
-    functions.write_todos(todos)
 
+    # This if-statement prevents an empty to-do from
+    # being added if the input_box is cleared
+    if todo != "\n":
+        todos.append(todo)
+        functions.write_todos(todos)
+    # Clear the input box once a to-do is added to the list
+    st.session_state["new_todo"] = ""
 
 st.title("My Todo App")
 st.subheader("This is my to-do app")
